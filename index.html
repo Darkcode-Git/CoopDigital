@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>API Cooperativa</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        h1, h2 { color: #2c3e50; }
+        ul { margin-bottom: 1em; }
+        code { background: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+        .section { margin-bottom: 2em; }
+    </style>
+</head>
+<body>
+    <h1>API Cooperativa</h1>
+    <div class="section">
+        <h2>Descripción</h2>
+        <p>
+            <strong>Cooperativa</strong> es la clase principal que gestiona socios, cuentas y operaciones de una cooperativa financiera. Integra programación funcional para consultas y reportes.
+        </p>
+    </div>
+    <div class="section">
+        <h2>Atributos principales</h2>
+        <ul>
+            <li><code>nombre</code>: Nombre de la cooperativa</li>
+            <li><code>nit</code>: NIT de la cooperativa</li>
+            <li><code>socios</code>: Lista de socios registrados</li>
+            <li><code>cuentas</code>: Lista de cuentas registradas</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h2>Métodos públicos</h2>
+        <ul>
+            <li><code>listarSociosRegistrados()</code>: Muestra los nombres de los socios registrados.</li>
+            <li><code>streamNombresSocios()</code>: Devuelve un Stream de nombres de socios.</li>
+            <li><code>filtrarCuentasPorSaldoMinimo(double saldoMinimo)</code>: Filtra cuentas con saldo mayor al mínimo.</li>
+            <li><code>mostrarCuentasConSaldoMayor(double saldoMinimo)</code>: Muestra cuentas con saldo mayor al mínimo.</li>
+            <li><code>obtenerSumaTotalSaldos()</code>: Suma total de saldos de todas las cuentas.</li>
+            <li><code>mostrarCalculosTotales()</code>: Muestra cálculos totales de saldos.</li>
+            <li><code>registrarSocio(Socio socio)</code>: Registra un nuevo socio.</li>
+            <li><code>agregarCuenta(Cuenta cuenta)</code>: Agrega una nueva cuenta.</li>
+            <li><code>aplicarInteresesCuentasAhorro()</code>: Aplica intereses a cuentas de ahorro.</li>
+            <li><code>buscarSocioPorCedula(String cedula)</code>: Busca un socio por cédula.</li>
+            <li><code>buscarCuenta(String numeroCuenta)</code>: Busca una cuenta por número.</li>
+            <li><code>generarReporteCompleto(double saldoMinimo)</code>: Genera un reporte completo de la cooperativa.</li>
+            <li><code>getNombre()</code>: Obtiene el nombre de la cooperativa.</li>
+            <li><code>getNit()</code>: Obtiene el NIT de la cooperativa.</li>
+            <li><code>getSocios()</code>: Obtiene la lista de socios.</li>
+            <li><code>getCuentas()</code>: Obtiene la lista de cuentas.</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h2>Ejemplo de uso</h2>
+        <pre><code>Cooperativa coop = new Cooperativa("Mi Cooperativa", "123456789");
+coop.registrarSocio(new Socio(...));
+coop.agregarCuenta(new Cuenta(...));
+coop.generarReporteCompleto(1000.0);
+        </code></pre>
+    </div>
+</body>
+</html>
+
