@@ -21,9 +21,12 @@ public final class Deposito implements Transaccion {
         try {
             double saldoAnterior = cuenta.getSaldo();
             cuenta.depositar(monto);
+            double nuevoSaldo = cuenta.getSaldo();
 
-            LOGGER.info(String.format("Depósito ejecutado: Cuenta  Monto:, Saldo anterior: , Nuevo saldo: ",
-                    cuenta.getNumeroCuenta(), monto, saldoAnterior, cuenta.getSaldo()));
+            LOGGER.info(String.format(
+                "Depósito ejecutado: Cuenta %s, Monto: %.2f, Saldo anterior: %.2f, Nuevo saldo: %.2f",
+                cuenta.getNumeroCuenta(), monto, saldoAnterior, nuevoSaldo
+            ));
 
         } catch (Exception e) {
             LOGGER.severe("Error al ejecutar depósito: " + e.getMessage());
@@ -42,14 +45,12 @@ public final class Deposito implements Transaccion {
     }
 
     @Override
-    public Cuenta getCuenta() {return cuenta;
+    public Cuenta getCuenta() {
+        return cuenta;
     }
 
     @Override
-    public String toString() {return{
-        return String.format("Deposito{cuenta==, monto=%20}"
-        @Override
-        public String toString () {
-            return String.format("Deposito{cuenta=%s, monto=%.2f}", cuenta.getNumeroCuenta(), monto);
-        }
+    public String toString() {
+        return String.format("Deposito{cuenta=%s, monto=%.2f}", cuenta.getNumeroCuenta(), monto);
+    }
 }
