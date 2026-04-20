@@ -83,6 +83,7 @@ Esquema inicial:
 
 Integración:
 - JDBC + `DataSource` gestionado por singleton.
+- Propiedades de configuración soportadas: `coop.jdbc.url`, `coop.jdbc.user`, `coop.jdbc.password`.
 
 ## 8) Serialización y sesión
 - Entidades principales serializables (`Asociado`, `Cuenta`, `Credito`).

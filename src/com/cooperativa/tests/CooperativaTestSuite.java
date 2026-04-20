@@ -75,5 +75,16 @@ public final class CooperativaTestSuite {
         if (cuenta.getSaldo().compareTo(new BigDecimal("1050")) != 0) {
             throw new AssertionError("Control de concurrencia/idempotencia inválido: " + cuenta.getSaldo());
         }
+
+        try (TransaccionConcurrenteService concurrente = new TransaccionConcurrenteService(4)) {
+            Future<Void> f4 = concurrente.depositarAsync(cuenta, new BigDecimal("25"), "tx-3");
+            Future<Void> f5 = concurrente.depositarAsync(cuenta, new BigDecimal("25"), "tx-4");
+            f4.get();
+            f5.get();
+        }
+
+        if (cuenta.getSaldo().compareTo(new BigDecimal("1100")) != 0) {
+            throw new AssertionError("Concurrencia con tokens únicos inválida: " + cuenta.getSaldo());
+        }
     }
 }

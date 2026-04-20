@@ -10,6 +10,10 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 public final class DataSourceSingleton {
+    public static final String PROP_JDBC_URL = "coop.jdbc.url";
+    public static final String PROP_JDBC_USER = "coop.jdbc.user";
+    public static final String PROP_JDBC_PASSWORD = "coop.jdbc.password";
+
     private static volatile DataSource dataSource;
 
     private DataSourceSingleton() {
@@ -20,9 +24,9 @@ public final class DataSourceSingleton {
             synchronized (DataSourceSingleton.class) {
                 if (dataSource == null) {
                     dataSource = new SimpleDriverManagerDataSource(
-                            System.getProperty("coop.jdbc.url", "jdbc:h2:mem:coopdb"),
-                            System.getProperty("coop.jdbc.user", "sa"),
-                            System.getProperty("coop.jdbc.password", "")
+                            System.getProperty(PROP_JDBC_URL, "jdbc:h2:mem:coopdb"),
+                            System.getProperty(PROP_JDBC_USER, "sa"),
+                            System.getProperty(PROP_JDBC_PASSWORD, "")
                     );
                 }
             }

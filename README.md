@@ -29,3 +29,8 @@ Ejecutar pruebas:
 ```bash
 java -cp src com.cooperativa.tests.CooperativaTestSuite
 ```
+
+## Configuración JDBC
+- `coop.jdbc.url` (default: `jdbc:h2:mem:coopdb`)
+- `coop.jdbc.user` (default: `sa`)
+- `coop.jdbc.password` (default: vacío)
