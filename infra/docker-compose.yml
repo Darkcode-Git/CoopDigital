@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: coopdigital
+      POSTGRES_USER: coopdigital
+      POSTGRES_PASSWORD: coopdigital
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  backend:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    environment:
+      PORT: 3001
+      JWT_SECRET: super-secret
+      DATABASE_URL: postgres://coopdigital:coopdigital@postgres:5432/coopdigital
+    ports:
+      - '3001:3001'
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: frontend/Dockerfile
+    environment:
+      VITE_API_URL: http://localhost:3001/api
+    ports:
+      - '5173:4173'
+    depends_on:
+      - backend
