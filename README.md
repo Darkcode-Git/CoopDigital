@@ -1,25 +1,31 @@
-EVIDENCIA DE APRENDIZAJE UNIDAD 3 
+# CoopDigital
 
-1. Clases, subclases y relaciones:  
+Implementación de referencia para una cooperativa digital con arquitectura Java por capas y patrones de diseño OO2.
 
-Definir al menos 3 clases principales (ejemplo: Usuario, Producto, Pedido).  
+## Estructura
+- `src/com/cooperativa/model`: entidades del dominio.
+- `src/com/cooperativa/services`: lógica de negocio y concurrencia.
+- `src/com/cooperativa/persistence`: acceso JDBC.
+- `src/com/cooperativa/infrastructure`: singleton de DataSource y serialización.
+- `src/com/cooperativa/factory`: Abstract Factory de productos financieros.
+- `src/com/cooperativa/facade`: Facade de validación crediticia.
+- `src/com/cooperativa/services/command`: Command con undo/redo.
+- `src/com/cooperativa/services/observer`: Observer para notificaciones.
+- `src/com/cooperativa/tests`: pruebas de validación técnica.
+- `src/com/cooperativa/documentation/PlanImplementacion.md`: alcance, UML textual y roadmap.
 
-Crear al menos una subclase que herede de otra (ejemplo: Cliente hereda de Usuario).  
+## Ejecución
+Compilar:
+```bash
+javac $(find src -name '*.java')
+```
 
-Implementar relaciones entre clases: asociación, composición o agregación (ejemplo: un Pedido contiene varios Productos). 
+Ejecutar demo:
+```bash
+java -cp src com.cooperativa.presentation.CooperativaApp
+```
 
-Pilares: 
-
-Abstracción: La clase Cuenta oculta los detalles internos de gestión de transacciones, validaciones y cálculo de intereses, exponiendo únicamente una interfaz clara (depositar (), retirar (), aplicarInteres()). 
-
-Encapsulamiento: todos los atributos son private o protected; acceso controlado mediante métodos. 
-
-Herencia y polimorfismo: uso correcto de extends, super (), y métodos abstractos (aplicarInteres()). 
-
-Constructores con validación: evitan estados inválidos desde la creación del objeto. 
-
-Inmutabilidad: métodos como getCuentas() devuelven copias para evitar modificaciones externas. 
-
-Semántica: nombres de clases y métodos alineados con el modelo de cooperativa de ahorro digtal. 
-
- 
+Ejecutar pruebas:
+```bash
+java -cp src com.cooperativa.tests.CooperativaTestSuite
+```
