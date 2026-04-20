@@ -1,7 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = process.env.JWT_SECRET ?? 'dev-secret';
+import { env } from '../config/env.js';
 
 export interface AuthenticatedRequest extends Request {
   user?: {
@@ -21,7 +20,7 @@ export const requireAuth = (req: AuthenticatedRequest, res: Response, next: Next
   const token = header.replace('Bearer ', '');
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, env.JWT_SECRET);
     if (typeof decoded === 'string') {
       throw new Error('Token inválido');
     }

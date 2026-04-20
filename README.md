@@ -21,6 +21,7 @@ El código Java original permanece en `src/` como referencia de dominio. La nuev
 
 ```bash
 npm install
+cp .env.example .env
 ```
 
 ## Comandos principales

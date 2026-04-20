@@ -1,10 +1,12 @@
 services:
   postgres:
     image: postgres:16-alpine
+    env_file:
+      - ../.env
     environment:
-      POSTGRES_DB: coopdigital
-      POSTGRES_USER: coopdigital
-      POSTGRES_PASSWORD: coopdigital
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - '5432:5432'
     volumes:
@@ -14,10 +16,12 @@ services:
     build:
       context: ..
       dockerfile: backend/Dockerfile
+    env_file:
+      - ../.env
     environment:
       PORT: 3001
-      JWT_SECRET: super-secret
-      DATABASE_URL: postgres://coopdigital:coopdigital@postgres:5432/coopdigital
+      JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: ${DATABASE_URL_DOCKER}
     ports:
       - '3001:3001'
     depends_on:
@@ -27,8 +31,10 @@ services:
     build:
       context: ..
       dockerfile: frontend/Dockerfile
+    env_file:
+      - ../.env
     environment:
-      VITE_API_URL: http://localhost:3001/api
+      VITE_API_URL: http://backend:3001/api
     ports:
       - '5173:4173'
     depends_on:

@@ -2,8 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import type { AuthCredentials, AuthUser, Session } from '@coopdigital/shared';
 import type { DataStore } from '../domain/models.js';
-
-const JWT_SECRET = process.env.JWT_SECRET ?? 'dev-secret';
+import { env } from '../config/env.js';
 
 export const registerUser = async (store: DataStore, payload: AuthCredentials): Promise<AuthUser> => {
   if (store.usuarios.has(payload.email)) {
@@ -33,7 +32,7 @@ export const loginUser = async (store: DataStore, payload: AuthCredentials): Pro
     throw new Error('Credenciales inválidas');
   }
 
-  const token = jwt.sign({ sub: user.id, role: user.role, email: user.email }, JWT_SECRET, {
+  const token = jwt.sign({ sub: user.id, role: user.role, email: user.email }, env.JWT_SECRET, {
     expiresIn: '2h',
   });
 
