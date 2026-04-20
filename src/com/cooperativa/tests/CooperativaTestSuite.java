@@ -62,11 +62,13 @@ public final class CooperativaTestSuite {
     private static void pruebaConcurrencia() throws Exception {
         ProductoFinancieroFactory factory = new FabricaProductoEstandar(new BigDecimal("0.02"));
         Cuenta cuenta = factory.crearCuentaAhorro("CA-T3", new BigDecimal("1000"));
+        String tokenIdempotente = "tx-1";
+        String tokenRetiro = "tx-2";
 
         try (TransaccionConcurrenteService concurrente = new TransaccionConcurrenteService(4)) {
-            Future<Void> f1 = concurrente.depositarAsync(cuenta, new BigDecimal("100"), "tx-1");
-            Future<Void> f2 = concurrente.depositarAsync(cuenta, new BigDecimal("100"), "tx-1");
-            Future<Void> f3 = concurrente.retirarAsync(cuenta, new BigDecimal("50"), "tx-2");
+            Future<Void> f1 = concurrente.depositarAsync(cuenta, new BigDecimal("100"), tokenIdempotente);
+            Future<Void> f2 = concurrente.depositarAsync(cuenta, new BigDecimal("100"), tokenIdempotente);
+            Future<Void> f3 = concurrente.retirarAsync(cuenta, new BigDecimal("50"), tokenRetiro);
             f1.get();
             f2.get();
             f3.get();

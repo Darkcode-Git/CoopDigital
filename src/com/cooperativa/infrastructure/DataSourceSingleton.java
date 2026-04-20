@@ -56,16 +56,24 @@ public final class DataSourceSingleton {
         }
 
         @Override
-        public PrintWriter getLogWriter() {
-            return null;
+        public PrintWriter getLogWriter() throws SQLFeatureNotSupportedException {
+            throw new SQLFeatureNotSupportedException(
+                    "Log writer no soportado por SimpleDriverManagerDataSource"
+            );
         }
 
         @Override
-        public void setLogWriter(PrintWriter out) {
+        public void setLogWriter(PrintWriter out) throws SQLFeatureNotSupportedException {
+            throw new SQLFeatureNotSupportedException(
+                    "Log writer no soportado por SimpleDriverManagerDataSource"
+            );
         }
 
         @Override
-        public void setLoginTimeout(int seconds) {
+        public void setLoginTimeout(int seconds) throws SQLFeatureNotSupportedException {
+            throw new SQLFeatureNotSupportedException(
+                    "Login timeout no soportado por SimpleDriverManagerDataSource"
+            );
         }
 
         @Override
@@ -75,7 +83,9 @@ public final class DataSourceSingleton {
 
         @Override
         public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-            throw new SQLFeatureNotSupportedException("No soportado");
+            throw new SQLFeatureNotSupportedException(
+                    "Parent logger no soportado por SimpleDriverManagerDataSource"
+            );
         }
 
         @Override

@@ -33,6 +33,7 @@ public final class TransaccionConcurrenteService implements AutoCloseable {
             Lock lock = locksPorCuenta.computeIfAbsent(cuenta.getNumero(), key -> new ReentrantLock());
             lock.lock();
             try {
+                // Si el token ya fue procesado, la operación se omite para garantizar idempotencia.
                 if (!tokensProcesados.add(token)) {
                     return null;
                 }

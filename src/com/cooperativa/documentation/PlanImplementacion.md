@@ -70,6 +70,9 @@ Casos:
 - Excepciones de dominio: `CooperativaException`, `SaldoInsuficienteException`, `MontoInvalidoException`, `PersistenciaException`.
 - Validaciones defensivas en constructores y operaciones.
 - Reglas de propagación: dominio -> servicio -> presentación.
+  - Dominio: lanza excepciones de negocio específicas.
+  - Servicio: captura excepciones técnicas y las envuelve en excepciones de aplicación cuando aplique.
+  - Presentación: registra el error y traduce la respuesta a mensaje funcional para el usuario.
 
 ## 6) Concurrencia y consistencia
 - `ExecutorService` en `TransaccionConcurrenteService`.
