@@ -1,0 +1,23 @@
+{
+  "name": "coopdigital",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo CoopDigital Full Stack Open",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w backend & npm run dev -w frontend",
+    "build": "npm run build -w @coopdigital/shared && npm run build -w @coopdigital/backend && npm run build -w @coopdigital/frontend",
+    "lint": "npm run lint -w @coopdigital/shared && npm run lint -w @coopdigital/backend && npm run lint -w @coopdigital/frontend",
+    "typecheck": "npm run build -w @coopdigital/shared && npm run typecheck -w @coopdigital/backend && npm run typecheck -w @coopdigital/frontend",
+    "test": "npm run test -w @coopdigital/shared && npm run test -w @coopdigital/backend && npm run test -w @coopdigital/frontend",
+    "test:coverage": "npm run test:coverage -w @coopdigital/shared && npm run test:coverage -w @coopdigital/backend && npm run test:coverage -w @coopdigital/frontend",
+    "check": "npm run lint && npm run typecheck && npm run test"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
