@@ -15,7 +15,7 @@ package modelo {
   }
 
   class CooperativaManager <<Singleton>> {
-    - instancia : CooperativaManager
+    - {static} instancia : CooperativaManager
     - cooperativa : Cooperativa
     + getInstancia() : CooperativaManager
     + getCooperativa() : Cooperativa
