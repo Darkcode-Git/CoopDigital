@@ -1,0 +1,74 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+package modelo {
+  class Cooperativa {
+    - nombre : String
+    - socios : List<Socio>
+    - historialTransacciones : List<Transaccion>
+    + registrarSocio(socio: Socio) : void
+    + registrarCuenta(socio: Socio, cuenta: Cuenta) : void
+    + ejecutarTransaccion(transaccion: Transaccion) : void
+    + listarNombresSocios() : List<String>
+    + filtrarCuentasConSaldoMayorA(minimo: double) : List<Cuenta>
+    + totalDineroCooperativa() : double
+  }
+
+  class CooperativaManager <<Singleton>> {
+    - instancia : CooperativaManager
+    - cooperativa : Cooperativa
+    + getInstancia() : CooperativaManager
+    + getCooperativa() : Cooperativa
+  }
+
+  class Socio {
+    - nombre : String
+    - cedula : String
+    - cuentas : List<Cuenta>
+    + abrirCuenta(cuenta: Cuenta) : void
+  }
+
+  abstract class Cuenta {
+    - numeroCuenta : String
+    # saldo : double
+    + depositar(monto: double) : void
+    + retirar(monto: double) : void
+    + aplicarPoliticaMensual() : void
+  }
+
+  class CuentaAhorros {
+    - tasaInteres : double
+    + aplicarInteres() : void
+  }
+}
+
+package transacciones {
+  interface Transaccion {
+    + ejecutar() : void
+    + getMonto() : double
+    + getTipo() : String
+  }
+
+  class Deposito
+  class Retiro
+
+  class TransaccionFactory <<Factory>> {
+    + crearDeposito(cuenta: Cuenta, monto: double) : Transaccion
+    + crearRetiro(cuenta: Cuenta, monto: double) : Transaccion
+  }
+}
+
+Cuenta <|-- CuentaAhorros
+Transaccion <|.. Deposito
+Transaccion <|.. Retiro
+
+Cooperativa "1" o-- "*" Socio
+Socio "1" o-- "*" Cuenta
+Cooperativa "1" o-- "*" Transaccion
+CooperativaManager --> Cooperativa
+Deposito --> Cuenta
+Retiro --> Cuenta
+TransaccionFactory --> Deposito
+TransaccionFactory --> Retiro
+
+@enduml

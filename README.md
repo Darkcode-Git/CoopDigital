@@ -11,6 +11,21 @@ El código Java original permanece en `src/` como referencia de dominio. La nuev
 - `shared/`: contratos de dominio tipados compartidos.
 - `infra/`: Docker Compose y esquema PostgreSQL inicial.
 
+## Prototipo Java (Ejercicio Integrador CoopRKC)
+
+Se agregó una implementación Java organizada por paquetes:
+
+- `src/modelo`: `Socio`, `Cuenta`, `CuentaAhorros`, `Cooperativa`, `CooperativaManager` (Singleton).
+- `src/transacciones`: `Transaccion`, `Deposito`, `Retiro`, `TransaccionFactory` (Factory).
+- `src/app`: `CooperativaApp` (demo completa) y `cooprkc-uml.puml` (diagrama UML).
+
+Ejecución rápida del prototipo Java:
+
+```bash
+javac -d /tmp/cooprkc-java-out src/modelo/*.java src/transacciones/*.java src/app/CooperativaApp.java
+java -cp /tmp/cooprkc-java-out app.CooperativaApp
+```
+
 ## Requisitos
 
 - Node.js 20+
